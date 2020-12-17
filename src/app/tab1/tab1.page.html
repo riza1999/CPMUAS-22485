@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Friends List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-toolbar>
+    <ion-segment value="all">
+      <ion-segment-button (click)="showAllUser()" value="all">All</ion-segment-button>
+      <ion-segment-button (click)="showFriends()" value="favorites">Friends</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+  <ion-item lines="none" *ngFor="let user of users; let i = index" [ngClass]="friendlist && !user.added ? 'hide' : ''">
+    <ion-avatar slot="start">
+      <img src="https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51405259-stock-illustration-male-avatar-profile-picture-use.jpg" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{user.firstName}} {{user.lastName}}</h2>
+      <p>{{user.email}}</p>
+    </ion-label>
+    <ion-button (click)="addFriend(user.email,i,$event)" [ngClass]="user.added ? 'hide' : ''" class='btnAdd-{{i}}'>Add Friend</ion-button>
+    <ion-button color="danger" (click)="removeFriend(user.email,i,$event)" [ngClass]="friendlist && user.added ? '' : 'hide'" class='btnRemove-{{i}}'>Remove Friend</ion-button>
+  </ion-item>
+
+</ion-content>
